@@ -4,6 +4,9 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        // load title screen
+        this.load.image('title', './assets/titlescreen.png');
+
         // load audio
         this.load.audio('sfx_select', './assets/select.wav');
         this.load.audio('sfx_explosion', './assets/duck_hit.wav');
@@ -35,6 +38,9 @@ class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize +
         borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
 
+        // add titlescreen
+        this.title = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'title').setOrigin(0, 0);
+
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -44,6 +50,7 @@ class Menu extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             // easy mode
             game.settings = {
+                players: 1,
                 spaceshipSpeed: 3,
                 gameTimer: 60000
             }
@@ -53,6 +60,7 @@ class Menu extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             // hard mode
             game.settings = {
+                players: 2,
                 spaceshipSpeed: 4,
                 gameTimer: 45000
             }
