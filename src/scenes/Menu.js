@@ -14,30 +14,6 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        // menu text configuration
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#FFFFFF',
-            color: '#00e1ff',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5
-            },
-            fixedWidth: 0
-        }
-
-        // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
-        borderPadding, 'DUCK PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to aim & (F) to shoot',
-        menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00e1ff';
-        menuConfig.color = '#FFFFFF';
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize +
-        borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
-
         // add titlescreen
         this.title = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'title').setOrigin(0, 0);
 
@@ -48,24 +24,24 @@ class Menu extends Phaser.Scene {
 
     update() {
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            // easy mode
+            // 1 Player
             game.settings = {
                 players: 1,
-                spaceshipSpeed: 3,
-                gameTimer: 60000
+                spaceshipSpeed: 0,
+                gameTimer: 0
             }
             this.sound.play('sfx_select');
-            this.scene.start('playScene');
+            this.scene.start('diffScene');
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            // hard mode
+            // 2 Player
             game.settings = {
                 players: 2,
-                spaceshipSpeed: 4,
-                gameTimer: 45000
+                spaceshipSpeed: 0,
+                gameTimer: 0
             }
             this.sound.play('sfx_select');
-            this.scene.start('playScene');
+            this.scene.start('diffScene');
         }
     }
 }
